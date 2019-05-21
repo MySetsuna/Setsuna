@@ -2,12 +2,17 @@
         "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
+    <!--设置session失效时间-->
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/spring-security.xml</param-value>
     </context-param>
     <!-- 解决post乱码 -->
+
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -34,11 +39,16 @@
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
     <!--spring容器启动-->
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
+    </listener>
+    <!--sesson监听类-->
+    <listener>
+        <listener-class>com.pinyougou.user.listener.UserSessionListener</listener-class>
     </listener>
 
     <servlet>
@@ -57,5 +67,6 @@
     <welcome-file-list>
         <welcome-file>home-index.html</welcome-file>
     </welcome-file-list>
+
 
 </web-app>

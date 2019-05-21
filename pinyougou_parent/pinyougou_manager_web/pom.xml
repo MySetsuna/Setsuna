@@ -159,6 +159,7 @@
                 <configuration>
                     <path>/</path>
                     <port>8081</port>
+                    <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
         </plugins>

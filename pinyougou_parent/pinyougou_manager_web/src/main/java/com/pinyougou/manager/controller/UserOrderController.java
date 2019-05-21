@@ -35,8 +35,8 @@ public class UserOrderController {
     private HttpServletRequest request;
 
     @RequestMapping("/findOrderAndOrderItem")
-    public Result findOrderAndOrderItem() {
-        String OrderStr = request.getParameter("Order");
+    public Result findOrderAndOrderItem(String OrderStr) {
+//        String OrderStr = request.getParameter("Order");
 
         Order border = JSON.parseObject(OrderStr, Order.class);
 

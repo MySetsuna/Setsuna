@@ -19,6 +19,14 @@ import java.util.List;
  */
 public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        int i = 0;
+        try{
+            ++i;
+        }finally {
+            ++i;
+        }
+        System.out.println(++i);
+
         //创建角色列表
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));

@@ -38,4 +38,7 @@ app.service('orderService',function($http){
 		return $http.post('../order/createPie.do',searchEntity)
     }
 
+    //
+    // this.
+    // '../userOrder/findOrderAndOrderItem.do?OrderStr='+order;
 });

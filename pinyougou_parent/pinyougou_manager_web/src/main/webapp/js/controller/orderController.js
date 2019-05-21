@@ -276,36 +276,35 @@ app.controller('orderController', function ($scope, $controller, orderService, i
             })
         });
     }
-
+    //传入检索条件,导出表格
     $scope.outPutAsXlsx = function (putAll) {
         if (putAll == 1) {
             var order = JSON.stringify($scope.searchEntity).replace(/(\")/g, '\'');
 
         } else {
-            var order = null;
+            var order = null;//String
         }
-        var options = {
-            url: '../userOrder/findOrderAndOrderItem.do',
-            data: {Order: order},
-            method: 'post'
-        };
-
-
-        DownLoadFile(options)
-    }
-    DownLoadFile = function (options) {
-        var config = $.extend(true, {method: 'post'}, options);
-        var $iframe = $('<iframe id="down-file-iframe" />');
-        var $form = $('<form target="down-file-iframe" method="' + config.method + '" />');
-        $form.attr('action', config.url);
-        for (var key in config.data) {
-            $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
-        }
-        $iframe.append($form);
-        $(document.body).append($iframe);
-        $form[0].submit();
-        $iframe.remove();
-    }
+        // var options = {
+        //     url: '../userOrder/findOrderAndOrderItem.do',
+        //     data: {Order: order},
+        //     method: 'post'
+        // };
+        window.location.href='../userOrder/findOrderAndOrderItem.do?OrderStr='+order;
+        // DownLoadFile(options)
+    };
+    // DownLoadFile = function (options) {
+    //     var config = $.extend(true, {method: 'post'}, options);
+    //     var $iframe = $('<iframe id="down-file-iframe" />');
+    //     var $form = $('<form target="down-file-iframe" method="' + config.method + '" />');
+    //     $form.attr('action', config.url);
+    //     for (var key in config.data) {
+    //         $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
+    //     }
+    //     $iframe.append($form);
+    //     $(document.body).append($iframe);
+    //     $form[0].submit();
+    //     $iframe.remove();
+    // }
 
 
     //条件展开
