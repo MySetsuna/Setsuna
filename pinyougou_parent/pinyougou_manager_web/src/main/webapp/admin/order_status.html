@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <!--&lt;!&ndash; 分页组件开始 &ndash;&gt;-->
+    <!--<script src="../plugins/angularjs/pagination.js"></script>-->
+    <!--<link rel="stylesheet" href="../plugins/angularjs/pagination.css">-->
+    <!--&lt;!&ndash; 分页组件结束 &ndash;&gt;-->
+    <script type="text/javascript" src="../js/base.js"></script>
+
+    <script src="../js/service/orderItemService.js"></script>
+    <script src="../js/service/itemCatService.js"></script>
+    <script src="../js/service/orderService.js"></script>
+    <script src="../js/controller/baseController.js"></script>
+    <script src="../js/controller/orderController.js"></script>
+
+</head>
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="orderController"
+      ng-init="searchType=1;searchEntity = {dateMap: {timeType: '3', byYear: '=',bySeason:'1',byMonth:'01','yearsStart':'2014','yearsEnd':'2019'}, propertyMap: {propertyType: '0'}};">
+<!-- .box-body -->
+<div class="box-header with-border">
+    <h3 class="box-title">管理</h3>
+</div>
+
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+
+        <!--工具栏-->
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <div>
+                        时间类型：<select ng-model="searchEntity.dateMap.timeType">
+                        <option value=0 >年度统计</option>
+                        <option value=1>历年季度</option>
+                        <option value=2>历年月份</option>
+                        <option value=3>自定义区间</option>
+                    </select>
+                    </div>
+                    <br>
+
+                    <div ng-if="searchEntity.dateMap.timeType=='0'">
+                        年度统计：
+                        <select ng-model="searchEntity.dateMap.byYear">
+                            <option value="=">---历年---</option>
+                            <option value="2014-01-01=2014-12-31">2014</option>
+                            <option value="2015-01-01=2015-12-31">2015</option>
+                            <option value="2016-01-01=2016-12-31">2016</option>
+                            <option value="2017-01-01=2017-12-31">2017</option>
+                            <option value="2018-01-01=2018-12-31">2018</option>
+                            <option value="2019-01-01=2019-12-31" >2019</option>
+                        </select>
+                    </div>
+                    <div ng-if="searchEntity.dateMap.timeType=='1'">
+                        季度：<select ng-model="searchEntity.dateMap.bySeason">
+                        <option value="1" ng-selected="true">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    </div>
+                    <div ng-if="searchEntity.dateMap.timeType=='2'">
+                        月份：<select ng-model="searchEntity.dateMap.byMonth">
+                        <option value="01" ng-selected="true">1月</option>
+                        <option value="02">2月</option>
+                        <option value="03">3月</option>
+                        <option value="04">4月</option>
+                        <option value="05">5月</option>
+                        <option value="06">6月</option>
+                        <option value="07">7月</option>
+                        <option value="08">8月</option>
+                        <option value="09">9月</option>
+                        <option value="10">10月</option>
+                        <option value="11">11月</option>
+                        <option value="12">12月</option>
+                    </select>
+                    </div>
+
+                    <div ng-if="(searchEntity.dateMap.timeType=='0'&&searchEntity.dateMap.byYear=='=')||searchEntity.dateMap.timeType=='1'||searchEntity.dateMap.timeType=='2'">
+                        <br>
+                        设置历年：
+                        <select ng-model="searchEntity.dateMap.yearsStart">
+                            <option value="2014" ng-selected="true">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019" >2019</option>
+                        </select>
+                        至
+                        <select ng-model="searchEntity.dateMap.yearsEnd">
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019" ng-selected="true">2019</option>
+                        </select>
+                        年
+                    </div>
+                    <div ng-if="searchEntity.dateMap.timeType=='3'">
+                        自定义区间: <input ng-model="searchEntity.dateMap.paymentTime.start" type="date">至<input
+                            ng-model="searchEntity.dateMap.paymentTime.end" type="date">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pull-left" style="margin-left: 20px">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <div>
+                        统计类型：<select ng-model="searchEntity.propertyMap.propertyType">
+                        <option value="">---请选择---</option>
+                        <option value="0">商品名</option>
+                        <option value="1">商品SKU</option>
+                        <option value="2">商品分类</option>
+                        <option value="3">品牌</option>
+                        <option value="4">商家ID</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <div ng-if="searchEntity.propertyMap.propertyType=='0'">
+                        商品名：<input type="text" ng-model="searchEntity.propertyMap.byGoodsName" placeholder="按商品名统计">
+                    </div>
+                    <div ng-if="searchEntity.propertyMap.propertyType=='1'">
+                        商品SKU：<input type="text" ng-model="searchEntity.propertyMap.byItemId" placeholder="按SKU统计">
+                    </div>
+                    <div ng-if="searchEntity.propertyMap.propertyType=='2'">
+                        商品分类：<input type="text" ng-model="searchEntity.propertyMap.byGoodsType" placeholder="按商品类型统计">
+                    </div>
+                    <div ng-if="searchEntity.propertyMap.propertyType=='3'">
+                        品牌：<input type="text" ng-model="searchEntity.propertyMap.byBrandName" placeholder="按品牌统计">
+                    </div>
+                    <div ng-if="searchEntity.propertyMap.propertyType=='4'">
+
+                        商家ID：<input type="text" ng-model="searchEntity.propertyMap.bySellerId" placeholder="按商家ID统计">
+                    </div>
+
+
+                </div>
+                <button class="btn btn-default" ng-click="reloadList()">统计</button>
+                <font size="2" color="red">*查询多项时,字段用半角逗号“,”隔开</font>
+                <!--<button class="btn btn-default" ng-click="outPutAsXlsx(1)">导出</button>-->
+                <!--<button class="btn btn-default" ng-click="outPutAsXlsx(0)">导出全部</button>-->
+            </div>
+
+        </div>
+
+        <!--工具栏/-->
+
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+                <th class="" style="padding-right:0px">
+                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                </th>
+                <th class="sorting">统计类型:{{propertyTypeName[searchEntity.propertyMap.propertyType]}}</th>
+                <th class="sorting">{{propertyTypeName[searchEntity.propertyMap.propertyType]}}</th>
+                <th class="sorting">商品SKU</th>
+                <th class="sorting">商品名</th>
+                <th class="sorting">销售数量</th>
+                <th class="sorting">销售额</th>
+                <th class="sorting">出售商家</th>
+                <!--<th class="text-center">操作</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entity in list">
+                <td><input type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
+                <td></td>
+                <td>{{entity.title}}</td><!--时间紧以后优化-->
+                <td>{{entity.id}}</td>
+                <td>{{entity.title}}</td>
+                <td>{{entity.sumNum}}</td>
+                <td>{{entity.sumFee|number:2}}</td>
+                <td>{{entity.seller}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--数据列表/-->
+
+    </div>
+    <!-- 数据表格 /-->
+    <!-- 分页 -->
+    <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+</div>
+<!-- /.box-body -->
+
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">编辑</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" width="800px">
+                    <tr>
+
+                        <td>商品SKU</td>
+
+                        <td><input class="form-control" ng-model="entity.itemId" placeholder="商品id"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>SPU_ID</td>
+
+                        <td><input class="form-control" ng-model="entity.goodsId" placeholder="SPU_ID"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>订单id</td>
+
+                        <td><input class="form-control" ng-model="entity.orderId" placeholder="订单id"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>商品标题</td>
+
+                        <td><input class="form-control" ng-model="entity.title" placeholder="商品标题"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>商品单价</td>
+
+                        <td><input class="form-control" ng-model="entity.price" placeholder="商品单价"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>商品购买数量</td>
+
+                        <td><input class="form-control" ng-model="entity.num" placeholder="商品购买数量"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>商品总金额</td>
+
+                        <td><input class="form-control" ng-model="entity.totalFee" placeholder="商品总金额"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>商品图片地址</td>
+
+                        <td><input class="form-control" ng-model="entity.picPath" placeholder="商品图片地址"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td></td>
+
+                        <td><input class="form-control" ng-model="entity.sellerId" placeholder=""></td>
+
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存
+                </button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

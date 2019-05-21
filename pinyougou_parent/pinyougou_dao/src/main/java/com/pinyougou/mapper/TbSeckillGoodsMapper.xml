@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.TbSeckillGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbSeckillGoods">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="item_id" jdbcType="BIGINT" property="itemId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="small_pic" jdbcType="VARCHAR" property="smallPic" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="stock_count" jdbcType="INTEGER" property="stockCount" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.TbSeckillOrderMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbSeckillOrder">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="seckill_id" jdbcType="BIGINT" property="seckillId" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="receiver_mobile" jdbcType="VARCHAR" property="receiverMobile" />
+    <result column="receiver" jdbcType="VARCHAR" property="receiver" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transactionId" />
+  </resultMap>
+</mapper>

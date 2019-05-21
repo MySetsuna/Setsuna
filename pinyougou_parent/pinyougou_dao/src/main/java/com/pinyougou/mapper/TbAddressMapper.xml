@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.TbAddressMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbAddress">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="province_id" jdbcType="VARCHAR" property="provinceId" />
+    <result column="city_id" jdbcType="VARCHAR" property="cityId" />
+    <result column="town_id" jdbcType="VARCHAR" property="townId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="is_default" jdbcType="VARCHAR" property="isDefault" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="alias" jdbcType="VARCHAR" property="alias" />
+  </resultMap>
+</mapper>

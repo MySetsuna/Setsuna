@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <!--&lt;!&ndash; 分页组件开始 &ndash;&gt;-->
+    <!--<script src="../plugins/angularjs/pagination.js"></script>-->
+    <!--<link rel="stylesheet" href="../plugins/angularjs/pagination.css">-->
+    <!--&lt;!&ndash; 分页组件结束 &ndash;&gt;-->
+    <script src="../plugins/echarts.js"></script>
+    <script type="text/javascript" src="../js/base.js"></script>
+
+    <script src="../js/service/orderItemService.js"></script>
+    <script src="../js/service/orderService.js"></script>
+    <script src="../js/service/itemCatService.js"></script>
+    <script src="../js/controller/baseController.js"></script>
+    <script src="../js/controller/orderController.js"></script>
+
+</head>
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="orderController"
+      ng-init="selectItemCat1List();">
+<!-- .box-body -->
+<div class="box-header with-border">
+    <h3 class="box-title">管理</h3>
+</div>
+
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+
+        <!--工具栏-->
+        <div class="box-tools pull-left">
+            <div class="has-feedback">
+                开始时间：<input type="date" ng-model="searchEntity.dateMap.paymentTime.start">&nbsp;&nbsp;
+                结束时间：<input type="date" ng-model="searchEntity.dateMap.paymentTime.end">
+                <button type="button" ng-click="createPie()" class="btn btn-default" title="生成"><i
+                        class="fa fa-refresh"></i> 生成饼状图
+                </button>
+            </div>
+            <br>
+            <div class="has-feedback">
+                一级分类：<select style="width: 25%;height: 25px" ng-model="category1Id"
+                             ng-options="cat1.id as cat1.name for cat1 in itemCat1List">
+            </select>&nbsp;&nbsp;
+                二级分类：<select style="width: 25%;height: 25px" ng-model="category2Id"
+                             ng-options="cat2.id as cat2.name for cat2 in itemCat2List">
+
+            </select>&nbsp;&nbsp;
+
+
+                <br>
+            </div>
+
+            <!--工具栏/-->
+
+            <!--数据列表-->
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <br>
+            <div id="main" style="width: 600px;height:400px;float: left"></div>
+            <div id="main1" style="width: 600px;height:400px;float:left"></div>
+            <!--数据列表/-->
+
+        </div>
+        <!-- 数据表格 /-->
+        <!-- 分页 -->
+        <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+    </div>
+    <!-- /.box-body -->
+
+    <!-- 编辑窗口 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">编辑</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped" width="800px">
+                        <tr>
+
+                            <td>商品SKU</td>
+
+                            <td><input class="form-control" ng-model="entity.itemId" placeholder="商品id"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>SPU_ID</td>
+
+                            <td><input class="form-control" ng-model="entity.goodsId" placeholder="SPU_ID"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>订单id</td>
+
+                            <td><input class="form-control" ng-model="entity.orderId" placeholder="订单id"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>商品标题</td>
+
+                            <td><input class="form-control" ng-model="entity.title" placeholder="商品标题"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>商品单价</td>
+
+                            <td><input class="form-control" ng-model="entity.price" placeholder="商品单价"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>商品购买数量</td>
+
+                            <td><input class="form-control" ng-model="entity.num" placeholder="商品购买数量"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>商品总金额</td>
+
+                            <td><input class="form-control" ng-model="entity.totalFee" placeholder="商品总金额"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>商品图片地址</td>
+
+                            <td><input class="form-control" ng-model="entity.picPath" placeholder="商品图片地址"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td></td>
+
+                            <td><input class="form-control" ng-model="entity.sellerId" placeholder=""></td>
+
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存
+                    </button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

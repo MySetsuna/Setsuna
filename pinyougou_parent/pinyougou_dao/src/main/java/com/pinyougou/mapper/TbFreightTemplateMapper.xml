@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.TbFreightTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbFreightTemplate">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="is_default" jdbcType="VARCHAR" property="isDefault" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="send_time_type" jdbcType="VARCHAR" property="sendTimeType" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+</mapper>

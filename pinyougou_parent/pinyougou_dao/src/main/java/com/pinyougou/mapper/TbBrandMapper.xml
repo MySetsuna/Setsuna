@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.TbBrandMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbBrand">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="first_char" jdbcType="VARCHAR" property="firstChar" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+</mapper>

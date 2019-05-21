@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>秒杀订单</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <!-- 分页组件开始 -->
+    <script src="../plugins/angularjs/pagination.js"></script>
+    <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+    <!-- 分页组件结束 -->
+    <script type="text/javascript" src="../js/base_pagination.js"></script>
+    <!--<script type="text/javascript" src="../js/service/goodsService.js"></script>-->
+    <script type="text/javascript" src="../js/service/seckillOrderService.js"></script>
+    <!--<script type="text/javascript" src="../js/service/itemCatService.js"></script>-->
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <!--<script type="text/javascript" src="../js/controller/goodsController.js"></script>-->
+    <script type="text/javascript" src="../js/controller/seckillOrderController.js"></script>
+
+</head>
+
+<body ng-app="pinyougou" ng-controller="seckillOrderController"
+      ng-init="findAll()"
+      class="hold-transition skin-red sidebar-mini">
+<!-- .box-body -->
+
+<div class="box-header with-border">
+    <h3 class="box-title">秒杀订单</h3>
+</div>
+
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+
+        <!--工具栏-->
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <button type="button" ng-click="dele()" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除</button>
+                    <button type="button" class="btn btn-default" title="刷新"><i class="fa fa-refresh"></i> 刷新</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-tools pull-right">
+            <div class="has-feedback">
+                商品名称：<input ng-model="searchEntity.goodsName">
+                <button class="btn btn-default" ng-click="reloadList()">查询</button>
+            </div>
+        </div>
+        <!--工具栏/-->
+
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+                <th class="" style="padding-right:0px">
+                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                </th>
+                <th class="sorting_asc">秒杀商品ID</th>
+                <th class="sorting">支付金额</th>
+                <th class="sorting">购买用户</th>
+                <th class="sorting">商家</th>
+                <th class="sorting">创建时间</th>
+                <th class="sorting">支付时间</th>
+                <th class="sorting">支付状态</th>
+                <th class="sorting">收货人地址</th>
+                <th class="sorting">收货人电话</th>
+                <th class="text-center">收货人</th>
+                <th class="text-center">交易流水</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entity in list">
+                <td><input ng-click="updateSelection($event,entity.id)" type="checkbox"></td>
+                <td>{{entity.seckillId}}</td>
+                <td>{{entity.money}}</td>
+                <td>{{entity.userId}}</td>
+                <td>{{entity.sellerId}}</td>
+                <td>{{entity.createTime}}</td>
+                <td>{{entity.payTime}}</td>
+                <td>{{status[entity.status]}}</td>
+                <td>{{entity.receiverAddress}}</td>
+                <td>{{entity.receiverMobile}}</td>
+                <td>{{entity.receiver}}</td>
+                <td>{{entity.transactionId}}</td>
+                <td class="text-center">
+                    <button type="button" class="btn bg-olive btn-xs">详情</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--数据列表/-->
+
+
+    </div>
+    <!-- 数据表格 /-->
+    <!-- 分页，paginationConf可以随便起个名字，主要是用于设置页面分页参数用的，要与$scope完成绑定 -->
+    <tm-pagination conf="paginationConf"></tm-pagination>
+
+</div>
+<!-- /.box-body -->
+
+</body>
+
+</html>

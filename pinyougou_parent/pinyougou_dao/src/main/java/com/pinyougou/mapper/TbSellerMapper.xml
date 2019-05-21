@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.TbSellerMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbSeller">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="linkman_name" jdbcType="VARCHAR" property="linkmanName" />
+    <result column="linkman_qq" jdbcType="VARCHAR" property="linkmanQq" />
+    <result column="linkman_mobile" jdbcType="VARCHAR" property="linkmanMobile" />
+    <result column="linkman_email" jdbcType="VARCHAR" property="linkmanEmail" />
+    <result column="license_number" jdbcType="VARCHAR" property="licenseNumber" />
+    <result column="tax_number" jdbcType="VARCHAR" property="taxNumber" />
+    <result column="org_number" jdbcType="VARCHAR" property="orgNumber" />
+    <result column="address" jdbcType="BIGINT" property="address" />
+    <result column="logo_pic" jdbcType="VARCHAR" property="logoPic" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="legal_person" jdbcType="VARCHAR" property="legalPerson" />
+    <result column="legal_person_card_id" jdbcType="VARCHAR" property="legalPersonCardId" />
+    <result column="bank_user" jdbcType="VARCHAR" property="bankUser" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+  </resultMap>
+</mapper>

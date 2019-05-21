@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置dubbo生产者服务启动的端口号，默认启动端口号为20880-->
+    <dubbo:protocol name="dubbo" port="20883"></dubbo:protocol>
+    <!--注册dubbo应用程序的名称，一般都跟项目名一致-->
+    <dubbo:application name="pinyougou-search-service"/>
+    <!--绑定注册中心的地址-->
+    <dubbo:registry address="zookeeper://192.168.218.128:2181"/>
+    <!--配置dubbo的bean的包扫描路径-->
+    <dubbo:annotation package="com.pinyougou.search.service.impl"/>
+</beans>

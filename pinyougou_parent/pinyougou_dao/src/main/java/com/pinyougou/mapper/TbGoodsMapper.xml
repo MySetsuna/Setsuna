@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.TbGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbGoods">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="default_item_id" jdbcType="BIGINT" property="defaultItemId" />
+    <result column="audit_status" jdbcType="VARCHAR" property="auditStatus" />
+    <result column="is_marketable" jdbcType="VARCHAR" property="isMarketable" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="caption" jdbcType="VARCHAR" property="caption" />
+    <result column="category1_id" jdbcType="BIGINT" property="category1Id" />
+    <result column="category2_id" jdbcType="BIGINT" property="category2Id" />
+    <result column="category3_id" jdbcType="BIGINT" property="category3Id" />
+    <result column="small_pic" jdbcType="VARCHAR" property="smallPic" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="type_template_id" jdbcType="BIGINT" property="typeTemplateId" />
+    <result column="is_enable_spec" jdbcType="VARCHAR" property="isEnableSpec" />
+    <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
+  </resultMap>
+</mapper>
