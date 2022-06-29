@@ -47,7 +47,7 @@
         <spring.version>4.2.4.RELEASE</spring.version>
         <servlet-api.version>2.5</servlet-api.version>
         <dubbo.version>2.6.0</dubbo.version>
-        <zookeeper.version>3.4.7</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
         <mapper.version>2.3.4</mapper.version>
         <pagehelper.version>4.0.0</pagehelper.version>
